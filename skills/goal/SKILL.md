@@ -7,6 +7,22 @@ description: "Use when executing SDD loop over specs and tickets."
 
 Executes an autonomous implementation loop driven strictly by specifications and ticket breakdowns.
 
+## Strict clarification gate
+
+Before inspecting implementation for the purpose of editing, parse the user's arguments and compare them with the formal spec, repository instructions, ticket dependencies, and requested task order.
+
+Test doubles/stubs/fakes are allowed only inside tests and only when they preserve the behavior under test. Never use a production stub, fake, placeholder, or simulated integration to satisfy a requirement.
+
+**Ask a focused clarification question before any code edit, commit, or tracker mutation** only when there is a genuine contradiction or material ambiguity about scope, order, acceptance criteria, starting point, baseline, or implementation strategy. Never ask whether a production stub is acceptable: it is not. This is the only normal pause; when the request is coherent, continue autonomously through the complete queue. Examples:
+
+- the requested starting issue conflicts with ticket dependencies;
+- “continue” does not say whether partial work must be completed or skipped;
+- the user asks for implementation and review-only work at the same time;
+- the spec requires a real integration/validator but the argument appears to authorize a fake or deferred implementation;
+- a closed ticket's acceptance criteria are not demonstrably satisfied.
+
+Do not silently choose an interpretation when the conflict is material. State the conflicting facts and offer concise options. Do not ask for confirmation of ordinary engineering decisions that are already determined by the spec, ticket, repository conventions, or tests.
+
 ## Prerequisites Check (Strict Guard)
 
 Before writing any code or making edits, verify that the repository has:
