@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+cd "$HOME/.agents" || exit 1
+
+stash_created=false
+
+if [[ -n "$(git status --porcelain)" ]]; then
+  git stash push --include-untracked -m "auto sync $(date '+%Y-%m-%d %H:%M')"
+  stash_created=true
+fi
+
+git pull --rebase
+
+if [[ "$stash_created" == true ]]; then
+  if ! git stash pop; then
+    echo "Conflito ao reaplicar as alterações locais; push abortado." >&2
+    exit 1
+  fi
+fi
+
+git add .
+
+if ! git diff --cached --quiet; then
+  git commit -m "auto sync agents $(date '+%Y-%m-%d %H:%M')"
+fi
+
+git push

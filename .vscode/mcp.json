@@ -1,0 +1,11 @@
+{
+  "servers": {
+    "ai-memory": {
+      "type": "http",
+      "url": "https://aimemo.pinheirodev.com.br/mcp",
+      "headers": {
+        "Authorization": "Bearer 7e8f7b1bd5268ffefd590a3bab331d851746472ae87725abff2d6136b8ec1760"
+      }
+    }
+  }
+}

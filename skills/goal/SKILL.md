@@ -41,6 +41,14 @@ If either is missing, refuse to implement blindly. Stop and ask the user to gene
 - Detect the project tech stack and preload relevant domain/language skills (e.g. `@golang` for Go, `@astro-guidelines` for Astro, or user-specified skills).
 - Present the planned queue and begin with Task 1.
 
+### Harness task tracking
+
+The coordinating goal agent owns task-status updates, including delegated work. Use V2 `tasks` tool from `opencode2-tasks` (V2 removed `todowrite`): each call sends full `tasks: [{id, status, summary, parent_id?}]` with only `pending` / `in_progress` (exactly ONE) / `blocked` / `done` / `cancelled`. Reconcile on resume, no duplicates. Future tasks stay `pending`; current stays `in_progress` through IMPLEMENT/REVIEW/fixes; mark `done` only after acceptance criteria + validations + clean review + verified commit, then activate next. Load bundled `task-planning` skill for policy.
+
+Keep base ref, findings, evidence, and commit in summary or ledger. If `tasks` is hidden in a restricted runtime catalog (e.g. Code Mode `execute`), keep the local ledger, disclose once, and continue IMPLEMENT; never refuse or return planning-only for this reason.
+
+When a continuation report includes concrete findings, immediately use them as the current task's implementation checklist. For signature preview flows, preserve preview identity (document/revision, normalized fingerprint/hash, and payload) through confirmation, compare with the persisted preview, distinguish preview mismatch from a stale-document conflict, and return the specified conflict response. This is implementation work, not a clarification request.
+
 ### 2. Task Iteration Loop (Per Task)
 For each task in sequential order:
 
@@ -54,11 +62,21 @@ For each task in sequential order:
    - Check if standards or requirements were violated or if scope creep occurred.
 
 3. **Iterate until Clean:**
-   - If findings exist: fix them via `/implement` and re-run `/code-review`.
-   - Repeat until the review passes 100% clean with zero unresolved issues.
+   - If findings exist, convert every finding into a remediation checklist and return immediately to `/implement` for the same task.
+   - A non-clean review is a normal loop state, not a terminal status, clarification reason, or permission request.
+   - Explicit task status/findings override `no task started`, `no GitHub issue`, and clean-worktree notes; those describe new-task/tracker state and do not permit skipping the open task.
+   - GitHub tracking is optional. Do not create or mutate GitHub without explicit authorization.
+   - Repeat `/implement` and `/code-review` until the review passes 100% clean with zero unresolved issues.
+   - Use `BLOCKED` only when autonomous diagnosis confirms that the environment or requirements prevent implementation or verification.
 
-4. **Advance:**
-   - Mark task completed and proceed directly to the next task.
+4. **Commit and advance:**
+   - After the review is explicitly clean, stage only the current task's reviewed changes and create a Git commit.
+   - Verify the commit succeeded, record its hash, and confirm no current-task changes remain uncommitted.
+   - If unrelated work was already present, isolate it in a named stash or patch and restore it only when its task starts; do not let it contaminate the next task's base.
+   - A dirty worktree alone is not a clarification reason. Ask only when changes from different tasks are interleaved so tightly that they cannot be separated safely without guessing.
+   - If a clean review already covers changes that also satisfy a later ticket, treat those changes as part of the current task's reviewed baseline and commit them now; do not reopen the review or ask based on thematic overlap.
+   - Mark the task completed and proceed directly to the next task only after the commit and worktree checks pass.
+   - Advance in the same run: announce `IMPLEMENT` for the next task immediately. Never end with queue items unstarted and never ask permission to continue ("say the word" style closings are forbidden). Stop only on exhausted queue, genuine contradiction, or diagnosed environment blocker.
 
 ---
 
