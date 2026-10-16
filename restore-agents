@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+REPOSITORY="psousaj/agents-config"
+DESTINATION="$HOME/.agents"
+BACKUP=false
+
+case "${1:-}" in
+  "") ;;
+  --backup-existing) BACKUP=true ;;
+  --help|-h)
+    printf 'Uso: %s [--backup-existing]\n' "$(basename "$0")"
+    printf 'Restaura %s em %s usando gh repo clone.\n' "$REPOSITORY" "$DESTINATION"
+    exit 0
+    ;;
+  *)
+    printf 'Opção desconhecida: %s\n' "$1" >&2
+    exit 2
+    ;;
+esac
+
+command -v gh >/dev/null 2>&1 || {
+  printf 'gh não encontrado no PATH.\n' >&2
+  exit 1
+}
+
+if [[ -e "$DESTINATION" ]]; then
+  if [[ "$BACKUP" != true ]]; then
+    printf 'Destino já existe: %s\n' "$DESTINATION" >&2
+    printf 'Use --backup-existing para movê-lo antes de restaurar.\n' >&2
+    exit 1
+  fi
+
+  backup="${DESTINATION}.backup-$(date '+%Y%m%d-%H%M%S')"
+  mv -- "$DESTINATION" "$backup"
+  printf 'Backup criado em: %s\n' "$backup"
+fi
+
+mkdir -p "$(dirname "$DESTINATION")"
+gh repo clone "$REPOSITORY" "$DESTINATION"
+printf '.agents restaurado em: %s\n' "$DESTINATION"

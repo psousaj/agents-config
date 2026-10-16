@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+command -v crontab >/dev/null 2>&1 || {
+  printf 'crontab não encontrado no PATH.\n' >&2
+  exit 1
+}
+
+HOME_DIR="${HOME:?HOME não definido}"
+OPENCODE_SYNC="$HOME_DIR/.config/opencode/sync-opencode"
+LEGACY_OPENCODE_SYNC="$HOME_DIR/.local/bin/sync-opencode"
+AGENTS_SYNC="$HOME_DIR/.agents/sync-agents"
+TMP_CRONTAB="$(mktemp)"
+FILTERED_CRONTAB="${TMP_CRONTAB}.filtered"
+
+cleanup() {
+  rm -f -- "$TMP_CRONTAB" "$FILTERED_CRONTAB"
+}
+trap cleanup EXIT
+
+crontab -l > "$TMP_CRONTAB" 2>/dev/null || :
+
+awk -v opencode="$OPENCODE_SYNC" -v legacy="$LEGACY_OPENCODE_SYNC" -v agents="$AGENTS_SYNC" \
+  'index($0, opencode) || index($0, legacy) || index($0, agents) { next } { print }' \
+  "$TMP_CRONTAB" > "$FILTERED_CRONTAB"
+mv -- "$FILTERED_CRONTAB" "$TMP_CRONTAB"
+
+{
+  cat "$TMP_CRONTAB"
+  printf '\n0 12,17 * * * /bin/bash %s >> /tmp/opencode-sync.log 2>&1\n' "$OPENCODE_SYNC"
+  printf '0 12,17 * * * /bin/bash %s >> /tmp/agents-sync.log 2>&1\n' "$AGENTS_SYNC"
+} > "$FILTERED_CRONTAB"
+
+crontab "$FILTERED_CRONTAB"
+printf 'Cron instalada: sync diário às 12h e 17h.\n'
