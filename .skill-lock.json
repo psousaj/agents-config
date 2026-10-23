@@ -398,6 +398,33 @@
       "skillFolderHash": "cf1f7aabac34c08f2cf833f039fa99af2f415183",
       "installedAt": "2026-10-22T20:24:56.297Z",
       "updatedAt": "2026-10-22T20:24:56.297Z"
+    },
+    "nestjs-best-practices": {
+      "source": "kadajett/agent-nestjs-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/kadajett/agent-nestjs-skills.git",
+      "skillPath": "skills/nestjs-best-practices/SKILL.md",
+      "skillFolderHash": "904db2759aaf1bd0e30eadedcd00efbd6367cc9f",
+      "installedAt": "2026-10-23T17:30:21.677Z",
+      "updatedAt": "2026-10-23T17:30:21.677Z"
+    },
+    "vercel-composition-patterns": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/vercel-labs/agent-skills.git",
+      "skillPath": "skills/composition-patterns/SKILL.md",
+      "skillFolderHash": "bf90d0a4b83ea054653350f9c67f6de235d3a368",
+      "installedAt": "2026-10-23T17:30:45.827Z",
+      "updatedAt": "2026-10-23T17:30:45.827Z"
+    },
+    "vercel-react-best-practices": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/vercel-labs/agent-skills.git",
+      "skillPath": "skills/react-best-practices/SKILL.md",
+      "skillFolderHash": "343db72180d05814949fef7d46be96b5c6ee86b3",
+      "installedAt": "2026-10-23T17:35:36.773Z",
+      "updatedAt": "2026-10-23T17:35:36.773Z"
     }
   },
   "dismissed": {
