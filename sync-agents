@@ -3,16 +3,31 @@ set -euo pipefail
 
 cd "$HOME/.agents" || exit 1
 
+stash_created=false
+
+if [[ -n "$(git status --porcelain)" ]]; then
+  git stash push --include-untracked -m "auto sync $(date '+%Y-%m-%d %H:%M')"
+  stash_created=true
+fi
+
+git pull --rebase -X theirs
+
+if [[ "$stash_created" == true ]]; then
+  if ! git stash pop; then
+    git diff --name-only --diff-filter=d -z "stash@{0}^1" "stash@{0}" | xargs -0 -r git checkout "stash@{0}" --
+    git diff --name-only --diff-filter=D -z "stash@{0}^1" "stash@{0}" | xargs -0 -r rm -f --
+    if git rev-parse --verify -q "stash@{0}^3" >/dev/null; then
+      git checkout "stash@{0}^3" -- .
+    fi
+    git reset >/dev/null 2>&1 || true
+    git stash drop
+  fi
+fi
+
 git add -A
 
 if ! git diff --cached --quiet; then
   git commit -m "auto sync agents $(date '+%Y-%m-%d %H:%M')"
-fi
-
-if ! git pull --rebase; then
-  git rebase --abort >/dev/null 2>&1 || true
-  echo "Conflito ao fazer pull --rebase; push abortado." >&2
-  exit 1
 fi
 
 git push
