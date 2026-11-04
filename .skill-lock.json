@@ -242,8 +242,9 @@
       "sourceUrl": "https://github.com/mattpocock/skills.git",
       "skillPath": "skills/engineering/triage/SKILL.md",
       "skillFolderHash": "4cb951d62ecccaed601cdc5f9a1b7b3d8a799635",
+      "pluginName": "mattpocock-skills",
       "installedAt": "2026-07-28T15:23:02.165Z",
-      "updatedAt": "2026-10-05T12:52:25.072Z"
+      "updatedAt": "2026-11-03T23:09:00.546Z"
     },
     "wayfinder": {
       "source": "mattpocock/skills",
@@ -315,8 +316,8 @@
       "sourceUrl": "https://github.com/kipperdev/skillpper.git",
       "skillPath": "design-craft/SKILL.md",
       "skillFolderHash": "d990628a222e769a67a51cefb2742a8a94e959ab",
-      "installedAt": "2026-10-22T12:04:34.903Z",
-      "updatedAt": "2026-10-22T12:04:34.903Z"
+      "installedAt": "2026-10-23T22:54:08.056Z",
+      "updatedAt": "2026-10-23T22:54:08.056Z"
     },
     "good-design": {
       "source": "kipperdev/skillpper",
@@ -324,8 +325,8 @@
       "sourceUrl": "https://github.com/kipperdev/skillpper.git",
       "skillPath": "good-design/SKILL.md",
       "skillFolderHash": "dc56bd0a5ac93fdffbe8d701df1830f098b1d27c",
-      "installedAt": "2026-10-22T12:04:34.904Z",
-      "updatedAt": "2026-10-22T12:04:34.904Z"
+      "installedAt": "2026-10-23T22:54:08.059Z",
+      "updatedAt": "2026-10-23T22:54:08.059Z"
     },
     "animation-performance": {
       "source": "emilkowalski/skill",
@@ -425,6 +426,79 @@
       "skillFolderHash": "343db72180d05814949fef7d46be96b5c6ee86b3",
       "installedAt": "2026-10-23T17:35:36.773Z",
       "updatedAt": "2026-10-23T17:35:36.773Z"
+    },
+    "resolving-merge-conflicts": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mattpocock/skills.git",
+      "skillPath": "skills/engineering/resolving-merge-conflicts/SKILL.md",
+      "skillFolderHash": "6aa1ed0b40fac0ebea5c0cf6f2addf82c99b6323",
+      "pluginName": "mattpocock-skills",
+      "installedAt": "2026-07-28T15:23:02.160Z",
+      "updatedAt": "2026-07-28T15:23:02.160Z"
+    },
+    "design-an-interface": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mattpocock/skills.git",
+      "skillPath": "skills/deprecated/design-an-interface/SKILL.md",
+      "skillFolderHash": "080dd14b88424aea0c6aca72357c617d6ab42625",
+      "installedAt": "2026-07-28T15:23:02.166Z",
+      "updatedAt": "2026-07-28T15:23:02.166Z"
+    },
+    "ai-agent-testing": {
+      "source": "naodeng/awesome-qa-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/naodeng/awesome-qa-skills.git",
+      "skillPath": "skills/en/testing-types/ai-agent-testing/SKILL.md",
+      "skillFolderHash": "69a1dca1b6b2c549a02c567cb30b63e84c95e28c",
+      "installedAt": "2026-10-23T03:01:50.553Z",
+      "updatedAt": "2026-10-23T03:01:50.553Z"
+    },
+    "agent-tool-testing": {
+      "source": "naodeng/awesome-qa-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/naodeng/awesome-qa-skills.git",
+      "skillPath": "skills/en/testing-types/agent-tool-testing/SKILL.md",
+      "skillFolderHash": "85e99d39eae9dbcedb5a712fb7b4e276ce276e53",
+      "installedAt": "2026-10-23T03:01:50.555Z",
+      "updatedAt": "2026-10-23T03:01:50.555Z"
+    },
+    "api-rate-limit-testing": {
+      "source": "naodeng/awesome-qa-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/naodeng/awesome-qa-skills.git",
+      "skillPath": "skills/en/testing-types/api-rate-limit-testing/SKILL.md",
+      "skillFolderHash": "a86a910806f67682295c205af952f7d2777c8b28",
+      "installedAt": "2026-10-23T03:01:50.560Z",
+      "updatedAt": "2026-10-23T03:01:50.560Z"
+    },
+    "api-security-testing": {
+      "source": "naodeng/awesome-qa-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/naodeng/awesome-qa-skills.git",
+      "skillPath": "skills/en/testing-types/api-security-testing/SKILL.md",
+      "skillFolderHash": "87f361bd580a22dd5820704e066b01759d8200b0",
+      "installedAt": "2026-10-23T03:01:50.562Z",
+      "updatedAt": "2026-10-23T03:01:50.562Z"
+    },
+    "edge-case-discovery": {
+      "source": "naodeng/awesome-qa-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/naodeng/awesome-qa-skills.git",
+      "skillPath": "skills/en/testing-types/edge-case-discovery/SKILL.md",
+      "skillFolderHash": "1b3f8cff4757cca5805bdd502545878cdf9c3404",
+      "installedAt": "2026-10-23T03:01:50.563Z",
+      "updatedAt": "2026-10-23T03:01:50.563Z"
+    },
+    "skillpper-saver": {
+      "source": "kipperdev/skillpper",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/kipperdev/skillpper.git",
+      "skillPath": "skillpper-saver/SKILL.md",
+      "skillFolderHash": "d91ef493354a56a8f98bf0976e6e3ad7b1a0410d",
+      "installedAt": "2026-10-23T22:54:08.063Z",
+      "updatedAt": "2026-10-23T22:54:08.063Z"
     }
   },
   "dismissed": {
@@ -432,16 +506,17 @@
   },
   "lastSelectedAgents": [
     "amp",
-    "antigravity",
-    "antigravity-cli",
     "cline",
     "codex",
     "cursor",
-    "deepagents",
+    "droid",
+    "fx",
     "gemini-cli",
     "github-copilot",
+    "kilo",
     "kimi-code-cli",
     "opencode",
+    "pi",
     "warp",
     "zed",
     "claude-code"
