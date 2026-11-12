@@ -3,6 +3,7 @@ set -euo pipefail
 
 REPOSITORY="psousaj/agents-config"
 DESTINATION="$HOME/.agents"
+SYNC_LINK="$HOME/.local/bin/sync-agents"
 BACKUP=false
 
 case "${1:-}" in
@@ -11,6 +12,7 @@ case "${1:-}" in
   --help|-h)
     printf 'Uso: %s [--backup-existing]\n' "$(basename "$0")"
     printf 'Restaura %s em %s usando gh repo clone.\n' "$REPOSITORY" "$DESTINATION"
+    printf 'Instala um link para sync-agents em %s.\n' "$SYNC_LINK"
     exit 0
     ;;
   *)
@@ -23,6 +25,12 @@ command -v gh >/dev/null 2>&1 || {
   printf 'gh não encontrado no PATH.\n' >&2
   exit 1
 }
+
+if [[ -e "$SYNC_LINK" || -L "$SYNC_LINK" ]] &&
+   { [[ ! -L "$SYNC_LINK" ]] || [[ "$(readlink -- "$SYNC_LINK")" != "$DESTINATION/sync-agents" ]]; }; then
+  printf 'Link não instalado: %s já existe e aponta para outro lugar.\n' "$SYNC_LINK" >&2
+  exit 1
+fi
 
 if [[ -e "$DESTINATION" ]]; then
   if [[ "$BACKUP" != true ]]; then
@@ -39,3 +47,8 @@ fi
 mkdir -p "$(dirname "$DESTINATION")"
 gh repo clone "$REPOSITORY" "$DESTINATION"
 printf '.agents restaurado em: %s\n' "$DESTINATION"
+mkdir -p "$(dirname "$SYNC_LINK")"
+if [[ ! -L "$SYNC_LINK" ]]; then
+  ln -s "$DESTINATION/sync-agents" "$SYNC_LINK"
+fi
+printf 'Comando sync-agents disponível em: %s\n' "$SYNC_LINK"
